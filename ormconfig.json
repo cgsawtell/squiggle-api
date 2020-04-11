@@ -7,8 +7,8 @@
 	 "database": "squiggles",
 	 "synchronize": true,
 	 "logging": false,
-	 "migrations": [
-		 "src/migration/**/*.ts"
+	 "entities": [
+		 "src/entity/**/*.ts"
 	 ],
 	 "subscribers": [
 		 "src/subscriber/**/*.ts"
