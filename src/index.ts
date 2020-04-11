@@ -22,7 +22,7 @@ getConnectionOptions().then(
 				database: connectionOptionsDBURL.database,
 				password: connectionOptionsDBURL.password,
 				host: connectionOptionsDBURL.host,
-				entities: ["dist/entity/**/*.js"]
+				entities: [process.env.ENTITIES_PATH]
 			})
 		}
 		catch(e){
