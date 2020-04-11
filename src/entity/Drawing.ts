@@ -1,5 +1,5 @@
 import {Entity, PrimaryGeneratedColumn, Column, BaseEntity} from "typeorm";
-import { Stroke } from "../../../common/interfaces";
+import { Stroke } from "../interfaces";
 
 @Entity()
 export class Drawing extends BaseEntity {
