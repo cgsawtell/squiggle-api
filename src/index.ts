@@ -16,8 +16,12 @@ const connectionOptionsDBURL = PostgressConnectionStringParser.parse(process.env
 getConnectionOptions().then(
 	async connectionOption => {
 		try{
-			console.log("config option",{ ...connectionOption, ...connectionOptionsDBURL })
-			await createConnection(<ConnectionOptions>{ ...connectionOption, ...connectionOptionsDBURL})
+			await createConnection(<ConnectionOptions>{ 
+				...connectionOption, 
+				username: connectionOptionsDBURL.user,
+				database: connectionOptionsDBURL.database,
+				password: connectionOptionsDBURL.password
+			})
 		}
 		catch(e){
 			console.log(e)
