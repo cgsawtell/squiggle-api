@@ -21,8 +21,7 @@ getConnectionOptions().then(
 				username: connectionOptionsDBURL.user,
 				database: connectionOptionsDBURL.database,
 				password: connectionOptionsDBURL.password,
-				host: connectionOptionsDBURL.host,
-				entities: [Drawing]
+				host: connectionOptionsDBURL.host
 			})
 		}
 		catch(e){
