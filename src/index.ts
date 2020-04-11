@@ -22,7 +22,7 @@ getConnectionOptions().then(
 				database: connectionOptionsDBURL.database,
 				password: connectionOptionsDBURL.password,
 				host: connectionOptionsDBURL.host,
-				entities: [process.env.ENTITIES_PATH]
+				entities: [Drawing]
 			})
 		}
 		catch(e){
