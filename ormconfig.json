@@ -1,27 +1,21 @@
 {
-   "type": "postgres",
-   "host": "localhost",
-   "port": 5432,
-   "username": "squiggles",
-   "password": "squigglewiggle",
-   "database": "squiggles",
-   "synchronize": true,
-   "logging": false,
-   "entities": [
-		 "build/entity/**/*.js",
-		 "src/entity/**/*.ts"
-   ],
-   "migrations": [
-		 "build/migration/**/*.js",
+	 "type": "postgres",
+	 "host": "localhost",
+	 "port": 5432,
+	 "username": "squiggles",
+	 "password": "squigglewiggle",
+	 "database": "squiggles",
+	 "synchronize": true,
+	 "logging": false,
+	 "migrations": [
 		 "src/migration/**/*.ts"
-   ],
-   "subscribers": [
-		 "build/subscriber/**/*.js",
+	 ],
+	 "subscribers": [
 		 "src/subscriber/**/*.ts"
-   ],
-   "cli": {
-      "entitiesDir": "src/entity",
-      "migrationsDir": "src/migration",
-      "subscribersDir": "src/subscriber"
-   }
+	 ],
+	 "cli": {
+			"entitiesDir": "src/entity",
+			"migrationsDir": "src/migration",
+			"subscribersDir": "src/subscriber"
+	 }
 }
