@@ -21,7 +21,8 @@ getConnectionOptions().then(
 				username: connectionOptionsDBURL.user,
 				database: connectionOptionsDBURL.database,
 				password: connectionOptionsDBURL.password,
-				host: connectionOptionsDBURL.host
+				host: connectionOptionsDBURL.host,
+				entities: ["dist/entity/**/*.js"]
 			})
 		}
 		catch(e){

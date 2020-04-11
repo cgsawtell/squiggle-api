@@ -13,6 +13,7 @@
       "sourceMap": true
 	 },
 		"exclude": [
+			".git",
 			"node_modules",
 			"**/node_modules/*"
 		]
