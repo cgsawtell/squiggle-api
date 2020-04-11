@@ -20,7 +20,8 @@ getConnectionOptions().then(
 				...connectionOption, 
 				username: connectionOptionsDBURL.user,
 				database: connectionOptionsDBURL.database,
-				password: connectionOptionsDBURL.password
+				password: connectionOptionsDBURL.password,
+				host: connectionOptionsDBURL.host
 			})
 		}
 		catch(e){
