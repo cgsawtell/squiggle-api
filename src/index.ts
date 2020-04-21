@@ -28,7 +28,6 @@ getConnectionOptions().then(
 		catch(e){
 			console.log(e)
 		}
-		console.log(process.env.ENTITIES_PATH)
 
 		const app = new Koa();
 		app.use(bodyParser());
