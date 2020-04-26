@@ -7,10 +7,26 @@ import * as bodyParser from 'koa-bodyparser';
 import { Drawing } from "./entity/Drawing";
 import { router } from "./routes/api";
 import { User } from "./entity/User";
+import * as sgMail from "@sendgrid/mail";
 
 if (process.env.NODE_ENV !== 'production') {
 	dotenv.config()
 }
+
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+// try {
+// 	const msg = {
+// 		to: 'hello@calebsawtell.com',
+// 		from: '	hello@calebsawtell.com',
+// 		subject: 'Sending with Twilio SendGrid is Fun',
+// 		text: 'and easy to do anywhere, even with Node.js',
+// 		html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+// 	};
+// 	// sgMail.send(msg);
+	
+// } catch (error) {
+// 	console.log(error)
+// }
 
 const PORT = process.env.PORT || 3000;
 const connectionOptionsDBURL = PostgressConnectionStringParser.parse(process.env.DATABASE_URL);
