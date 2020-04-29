@@ -1,15 +1,15 @@
 import { Drawing } from "../entity/Drawing";
 import * as Router from "koa-router";
+import * as passport from "koa-passport";
 
 export const drawingRouter = new Router()
-	.post('/drawing', async (ctx) => {
+	.post('/drawing', passport.authenticate("jwt", { session: false }), async (ctx) => {
 		const drawing = new Drawing();
-		drawing.version = ctx.request.body.version
 		drawing.canvas = ctx.request.body.canvas
 		await drawing.save()
 		ctx.body = drawing;
 	})
-	.patch('/drawing/:id', async (ctx) => {
+	.patch('/drawing/:id', passport.authenticate("jwt", { session: false }), async (ctx) => {
 		const drawing = await Drawing.findOne({ id: ctx.params.id })
 		drawing.canvas = ctx.request.body.canvas
 		await drawing.save()

@@ -13,6 +13,9 @@ if (process.env.NODE_ENV !== 'production') {
 	dotenv.config()
 }
 
+import "./auth"
+import * as passport from "koa-passport"
+
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 // try {
 // 	const msg = {
@@ -48,6 +51,7 @@ getConnectionOptions().then(
 
 		const app = new Koa();
 		app.use(bodyParser());
+		app.use(passport.initialize())
 		app.use(router.routes());
 		app.listen(PORT);
 

@@ -4,7 +4,7 @@ import bcrypt = require("bcrypt")
 import { registerDecorator, ValidationOptions, ValidatorConstraint, ValidatorConstraintInterface, ValidationArguments } from "class-validator";
 
 @ValidatorConstraint({ async: true })
-export class IsEmailExistConstraint implements ValidatorConstraintInterface {
+export class IsEmailUniqueConstraint implements ValidatorConstraintInterface {
 
 	validate(email: string, args: ValidationArguments) {
 		return User.findOne({ email }).then(user => {
@@ -15,17 +15,19 @@ export class IsEmailExistConstraint implements ValidatorConstraintInterface {
 
 }
 
-export function IsEmailExist(validationOptions?: ValidationOptions) {
+export function IsEmailUnique(validationOptions?: ValidationOptions) {
 	return function (object: Object, propertyName: string) {
 		registerDecorator({
 			target: object.constructor,
 			propertyName: propertyName,
 			options: validationOptions,
 			constraints: [],
-			validator: IsEmailExistConstraint
+			validator: IsEmailUniqueConstraint
 		});
 	};
 }
+
+const BCRYPT_HASH_ROUNDS = 10
 
 @Entity()
 export class User extends BaseEntity {
@@ -36,7 +38,7 @@ export class User extends BaseEntity {
 	@Column({ unique:true})
 	@IsDefined({ message: "We need your email" })
 	@IsEmail({}, {message:"Your email doesn't look right"})
-	@IsEmailExist({
+	@IsEmailUnique({
 		message: "Email address $value already exists."
 	})
 	email: string;
@@ -55,13 +57,24 @@ export class User extends BaseEntity {
 	@IsDefined({ message: "You need a password" })
 	password: string;
 
+	@Column({ nullable: true })
+	token: string;
+
 	@BeforeInsert()
 	@BeforeUpdate()
-	hashPassword() {
+	async hashPassword() {
 		if (this.password) {
 			
-			this.password = bcrypt.hashSync(this.password, 10);
+			this.password = await bcrypt.hash(this.password, BCRYPT_HASH_ROUNDS);
 		}
 	}
 
+	async isPasswordValid(attempt:string){
+		try {
+			const isPasswordValid = await bcrypt.compare(attempt, this.password)
+			return isPasswordValid
+		} catch (error) {
+			console.log("Error bcrypt comparing password: ",error)
+		}
+	} 
 }
